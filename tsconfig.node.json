@@ -1,0 +1,13 @@
+// No changes needed! This file is correctly configured.
+{
+  "compilerOptions": {
+    "target": "ES2022",
+    "lib": ["ES2023"],
+    "module": "ESNext",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "strict": true,
+    "composite": true // Good practice to add for project references
+  },
+  "include": ["vite.config.ts"]
+}

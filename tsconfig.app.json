@@ -1,0 +1,28 @@
+{
+  "compilerOptions": {
+    // --- Core settings from your old config ---
+    "target": "ES2020",
+    "useDefineForClassFields": true,
+    "lib": ["ES2020", "DOM", "DOM.Iterable"],
+    "module": "ESNext",
+    "jsx": "react-jsx",
+    "moduleResolution": "bundler",
+    "skipLibCheck": true,
+    "strict": true,
+
+    // --- Path mapping for easier imports during development ---
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    },
+
+    // --- ✅ KEY CHANGES FOR LIBRARY BUILD ---
+    "declaration": true, // Generates .d.ts files
+    "emitDeclarationOnly": true, // Lets Vite handle JS, tsc only does types
+    "declarationDir": "./dist", // Puts all .d.ts files in the 'dist' folder
+    "verbatimModuleSyntax": false, // Recommended to be false for library compatibility
+    "isolatedModules": false // Not needed when `emitDeclarationOnly` is true
+  },
+  "include": ["src"], // This config only applies to your 'src' folder
+  "exclude": ["node_modules", "dist"]
+}
