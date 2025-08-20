@@ -21,15 +21,15 @@ type AppProps = {
   templateJson?: string;
 };
 
-const App: React.FC<AppProps> = ({ templateJson }) => {
+const App: React.FC<AppProps> = () => {
   return (
     <Provider store={store}>
-      <InnerApp templateJson={templateJson} />
+      <InnerApp />
     </Provider>
   );
 };
 
-const InnerApp: React.FC<AppProps> = ({ templateJson }) => {
+const InnerApp: React.FC<AppProps> = () => {
   const stageRef = useRef<Konva.Stage | null>(null);
   const dispatch = useDispatch();
   const [json , setJson] = useState(null);
@@ -111,43 +111,43 @@ const InnerApp: React.FC<AppProps> = ({ templateJson }) => {
     }
   };
 
-  // useEffect(() => {
-  //   const onMessage = (event: MessageEvent) => {
+  useEffect(() => {
+    const onMessage = (event: MessageEvent) => {
 
-  //     const data = event.data;
-  //     if (!data || typeof data !== "object") return;
+      const data = event.data;
+      if (!data || typeof data !== "object") return;
 
-  //     switch (data.type) {
-  //       case "SEND_JSON":
-  //         console.log("Received number from parent:", data.payload.json);
-  //         setJson(data.payload.json)
-  //         break;
+      switch (data.type) {
+        case "SEND_JSON":
+          console.log("Received number from parent:", data.payload.json);
+          setJson(data.payload.json)
+          break;
 
-  //       case "INIT":
-  //         window.parent.postMessage({ type: "TOOL_READY" }, event.origin);
-  //         break;
+        case "INIT":
+          window.parent.postMessage({ type: "TOOL_READY" }, event.origin);
+          break;
 
-  //       case "UPDATE_TEMPLATE":
-  //         const template = JSON.parse(data.payload.json);
-  //         console.log("Template version:", data.payload.version, template);
-  //         break;
+        case "UPDATE_TEMPLATE":
+          const template = JSON.parse(data.payload.json);
+          console.log("Template version:", data.payload.version, template);
+          break;
 
-  //       case "REQUEST_EXPORT":
-  //         const exportedData = { json: JSON.stringify({ my: "data" }) };
-  //         window.parent.postMessage(
-  //           { type: "EXPORT_RESULT", payload: exportedData },
-  //           event.origin
-  //         );
-  //         break;
+        case "REQUEST_EXPORT":
+          const exportedData = { json: JSON.stringify({ my: "data" }) };
+          window.parent.postMessage(
+            { type: "EXPORT_RESULT", payload: exportedData },
+            event.origin
+          );
+          break;
 
-  //       default:
-  //         console.warn("Unknown message type:", data.type);
-  //     }
-  //   };
+        default:
+          console.warn("Unknown message type:", data.type);
+      }
+    };
 
-  //   window.addEventListener("message", onMessage);
-  //   return () => window.removeEventListener("message", onMessage);
-  // }, []);
+    window.addEventListener("message", onMessage);
+    return () => window.removeEventListener("message", onMessage);
+  }, []);
 
 
   useEffect(()=>{
