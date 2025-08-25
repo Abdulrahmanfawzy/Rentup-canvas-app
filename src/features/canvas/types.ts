@@ -69,6 +69,7 @@ export interface CanvasElement {
   fontStyle?: string;
   white_space?: string;
   objectFit?: 'cover' | 'contain' | 'fill';
+  imgBase64?: string
 }
 export interface CanvasFrameElement extends CanvasElement {
   type: "frame";

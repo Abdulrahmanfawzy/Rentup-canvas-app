@@ -331,9 +331,9 @@ const canvasSlice = createSlice({
     },
     addImageElement: (
       state,
-      action: PayloadAction<{ src: string; width: number; height: number }>
+      action: PayloadAction<{ imgBase64: string, src: string; width: number; height: number }>
     ) => {
-      const { src, width, height } = action.payload;
+      const { imgBase64, src, width, height } = action.payload;
 
       state.elements.push({
         id: nanoid(),
@@ -348,6 +348,7 @@ const canvasSlice = createSlice({
         originalWidth: width,
         originalHeight: height,
         fill: "",
+        imgBase64: imgBase64
       });
     },
     selectElement: (state, action: PayloadAction<string | null>) => {
