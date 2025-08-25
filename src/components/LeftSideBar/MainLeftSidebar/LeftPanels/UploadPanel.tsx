@@ -83,11 +83,13 @@ export function UploadPanel() {
 
     const reader = new FileReader();
     reader.onload = () => {
+      const imgBase64 = reader.result as string;
       const img = new Image();
       img.src = reader.result as string;
       img.onload = () => {
         dispatch(
           addImageElement({
+            imgBase64: imgBase64,
             src: img.src,
             width: img.width,
             height: img.height,
